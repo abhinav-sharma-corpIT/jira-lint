@@ -72,7 +72,6 @@ async function run(): Promise<void> {
     const {
       payload: {
         repository,
-        organization: { login: owner },
         pull_request: pullRequest,
       },
     } = github.context;
@@ -81,7 +80,7 @@ async function run(): Promise<void> {
       throw new Error(`Missing 'repository' from github action context.`);
     }
 
-    const { name: repo } = repository;
+    const { name: repo, owner: { login: owner } }  = repository;
 
     const {
       base: { ref: baseBranch },
